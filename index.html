@@ -50,6 +50,9 @@
 	function shuffle(array) {
 	  array.sort(() => Math.random() - 0.5);
 	  console.log(sArr);
+	  if (!arraysMatch(arr, sArr)) {
+		sorted = false;
+	  }
 	}
 	
 	function sorted() {
@@ -61,6 +64,7 @@
 	
 	////////////////////BOGO RANDOM SORT//////////////////
 	function sort_bogo(){
+	console.log("bogo sort ran");
 		if (arraysMatch(sArr, arr)) {
 			sorted();
 		}	
@@ -79,11 +83,13 @@
 	//////////////////////BUBBLE SORT//////////////////////////
 	var sorted = false;
 	function bubble_sort() {
+	console.log("bubble sort ran");
 		if (!sorted) {
-				if (arraysMatch(arr, sArr)){
-					sorted = true;
-					console.log("Sorted!");
-				}
+			if (arraysMatch(arr, sArr)){
+				sorted = true;
+				console.log("Sorted!");
+			}
+			else {
 				for (let i=0; i<sArr.length; i++){
 					(function(i) {
 						setTimeout(function() {
@@ -109,6 +115,7 @@
 						},300*i);
 					})(i);
 				}
+			}
 		}
 	}
 	
