@@ -9,14 +9,21 @@
 	<body onload="draw()">
 		<p class="lw">Sorting Algorithms</p>
 		<center>
-		  <canvas id="blocks" width='1020px' height='700px'></canvas><br>
-		  <button class="button" id='randomize' Onclick="randomize()";>RANDOMIZE</button>
-		  <button class="button" id='sort' Onclick="sort_bogo()">BOGO RANDOM</button>
-		  <button class="button" id='sort' Onclick="bubble_sort()">BUBBLE SORT</button>
-		  <button class="button" id='sort' Onclick="selection_sort()">SELECTION SORT</button>
+		  <span id="control-panel" class="control-panel">
+			  <p class="speed">SPEED:</p><input id="speed" type="range" min="1" max="500" class="slider" value="250"><p id="speed_value" class="speed"></p>
+			  <button class="button" id="set" Onclick="changeValues()">SET</button>
+			  <button class="button" id='randomize' Onclick="randomize()";>RANDOMIZE</button>
+			  <button class="button" id='reset' Onclick="reset()";>RESET</button>
+		  </span>
+		  <canvas id="blocks" width='1020px' height='700px'></canvas>
+		  <span id="algorithms" class="algorithms">
+			<button class="button" id='sort' Onclick="sort_bogo()">BOGO RANDOM</button>
+			<button class="button" id='sort' Onclick="bubble_sort()">BUBBLE SORT</button>
+			<button class="button" id='sort' Onclick="selection_sort()">SELECTION SORT</button>
+		  </span>
+		  <center>
 		  <br>
 		  <p class="data">ATTEMPTS:</p><p id="count" class="data"></p>
-		</center>
 	</body>
 	<script>
 	var canvas = document.getElementById("blocks");
@@ -31,7 +38,16 @@
 	var sArr =  ['1', '2', '3', '4', '5', '6'];
 	var count = 0;
 	var sorted = false;
+	var speed_set = 250;
 	
+	var speed = document.getElementById("speed");
+	var speed_value = document.getElementById("speed_value");
+	speed_value.innerHTML = speed.value;
+	
+	speed.oninput = function() {
+	  speed_value.innerHTML = this.value;
+	}
+
 	function draw() {
 		start_x = 60;
 	    ctx.fillStyle = "#36A1D4";
@@ -76,7 +92,7 @@
 			console.log(count);
 			setTimeout( function(){
 				sort_bogo();
-			}, 20 );		
+			}, speed_set );		
 		}		
 	}
 	//////////////////////SELECTION SORT///////////////////////
@@ -109,14 +125,14 @@
 									else {
 										setTimeout(function() {
 											bubble_sort();
-										},300*i);
+										},speed_set*i);
 									}
 								}
 								else {
 									return;
 								}
 							}
-						},300*i);
+						},speed_set*i);
 					})(i);
 				}
 			}
@@ -135,6 +151,17 @@
 		}
 		return true;
 	};
+	
+	function changeValues() {
+		speed_set = document.getElementById("speed").value;
+	}
+	
+	function reset() {
+		sArr = arr;
+		solved = true;
+		draw();
+		console.log("ran");
+	}
 	//https://chocolatevs.github.io/Sorting_Algorithms/
 	</script>
 </html>
