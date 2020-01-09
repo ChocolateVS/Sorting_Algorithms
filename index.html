@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html onload="setCanvasSize()">
 	<head>
 		<link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
 		<link rel='stylesheet' type="text/css" href="assets/css/style.css">
@@ -10,12 +10,12 @@
 		<p class="lw">Sorting Algorithms</p>
 		<center>
 		  <span id="control-panel" class="control-panel">
-			  <p class="speed">SPEED:</p><input id="speed" type="range" min="1" max="500" class="slider" value="250"><p id="speed_value" class="speed"></p>
+			  <p class="speed">SPEED:</p><input id="speed" type="range" min="1" max="1000" class="slider" value="250"><p id="speed_value" class="speed"></p>
 			  <button class="button" id="set" Onclick="changeValues()">SET</button>
 			  <button class="button" id='randomize' Onclick="randomize()";>RANDOMIZE</button>
 			  <button class="button" id='reset' Onclick="reset()";>RESET</button>
 		  </span>
-		  <canvas id="blocks" width='1020px' height='700px'></canvas>
+		  <canvas id="blocks"></canvas>
 		  <span id="algorithms" class="algorithms">
 			<button class="button" id='sort' Onclick="sort_bogo()">BOGO RANDOM</button>
 			<button class="button" id='sort' Onclick="bubble_sort()">BUBBLE SORT</button>
@@ -26,20 +26,24 @@
 		  <p class="data">ATTEMPTS:</p><p id="count" class="data"></p>
 	</body>
 	<script>
+	console.log(window.innerWidth, window.innerHeight);
 	var canvas = document.getElementById("blocks");
+	canvas.width = window.innerWidth/2;
+	canvas.height = window.innerHeight/2;
+	console.log("set");
 	var ctx = canvas.getContext("2d");
-	var canvas_w = 1020;
-	var canvas_h = 700;
-	var block_w = 100;
+	var canvas_w = canvas.width; 
+	var canvas_h = canvas.height; 
+	var block_w = canvas_w*0.098;
 	var block_h = canvas_h;
-	var start_x = 60;
-	var start_y = 20;
+	var start_x = 0.0588*canvas_w;
+	var start_y = canvas_h*0.0286;
 	var arr =  ['1', '2', '3', '4', '5', '6'];
 	var sArr =  ['1', '2', '3', '4', '5', '6'];
 	var count = 0;
 	var sorted = false;
 	var speed_set = 250;
-	
+
 	var speed = document.getElementById("speed");
 	var speed_value = document.getElementById("speed_value");
 	speed_value.innerHTML = speed.value;
@@ -54,8 +58,8 @@
 		ctx.fillRect(0,0,canvas_w,canvas_h);
 	    ctx.fillStyle = "#D22D16";
 			for(let i = 0; i < sArr.length; i++){
-			   ctx.fillRect(start_x, start_y+(100*sArr[i]), block_w,  block_h-100);
-			   start_x += 160;	
+			   ctx.fillRect(start_x, start_y+((0.143*canvas_h)*sArr[i]), block_w,  block_h-(0.143*canvas_h));
+			   start_x += 0.157*canvas_w;	
 			}
 	}
 		
@@ -157,10 +161,11 @@
 	}
 	
 	function reset() {
-		sArr = arr;
+		sArr =  ['1', '2', '3', '4', '5', '6'];
 		solved = true;
 		draw();
-		console.log("ran");
+		count = 0;
+		document.getElementById("count").innerHTML = count;
 	}
 	//https://chocolatevs.github.io/Sorting_Algorithms/
 	</script>
