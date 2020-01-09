@@ -14,7 +14,7 @@ canvas {
  box-shadow: 2px 2px 8px #000000; 
 }
 
-button {
+.button {
 	background-color: #E67235;
 	width: auto;
 	height: 40px;
@@ -22,6 +22,12 @@ button {
 	font-family:Arvo;
 	font-size:20px;
 	text-align:center;
+	transition-duration:0.1s;
+}
+
+.button:hover {
+	background-color: rgb(180,65,42);
+	transition-duration:0.1s;
 }
 
 .data {
