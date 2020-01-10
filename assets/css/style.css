@@ -34,7 +34,9 @@ canvas {
  display:inline;
 }
 
-
+.sort {
+	display:none;
+}
 .button {
 	background-color: #E67235;
 	width: auto;
@@ -44,6 +46,7 @@ canvas {
 	font-size:20px;
 	text-align:center;
 	transition-duration:0.1s;
+	display:inline;
 }
 
 .button:hover {

@@ -26,11 +26,10 @@
 		  <p class="data">ATTEMPTS:</p><p id="count" class="data"></p>
 	</body>
 	<script>
-	console.log(window.innerWidth, window.innerHeight);
+	//console.log(window.innerWidth, window.innerHeight);
 	var canvas = document.getElementById("blocks");
-	canvas.width = window.innerWidth/2;
-	canvas.height = window.innerHeight/2;
-	console.log("set");
+	canvas.width = window.innerWidth/(window.innerWidth/window.innerHeight);
+	canvas.height = window.innerHeight/(window.innerWidth/window.innerHeight);
 	var ctx = canvas.getContext("2d");
 	var canvas_w = canvas.width; 
 	var canvas_h = canvas.height; 
@@ -100,10 +99,42 @@
 		}		
 	}
 	//////////////////////SELECTION SORT///////////////////////
-
+	
+	function selection_sort() {
+		var index=0;
+		if (arraysMatch(arr, sArr)){
+			console.log("sorted");
+		}
+		else {
+			for (let m=0; m<sArr.length; m++){
+				console.log("index",index);
+				if (sArr[index] == Math.min.apply(null, sArr)){
+					console.log("Stay", sArr);
+				}
+				else {
+					for (let i=sArr.length-m; i>index; i--) {
+					console.log("i", i);
+						var e = i;
+						if (sArr[index]>sArr[i]){
+							console.log("swap",sArr);
+							var temp = sArr[index];
+							sArr[index] = sArr[i];
+							sArr[i] = temp;
+							console.log(sArr, "swapped");
+							draw();
+							return;
+						}		
+						else {
+							
+						}
+						index++;
+					}
+				}		
+			}
+		}
+	}
 	//////////////////////BUBBLE SORT//////////////////////////
 	function bubble_sort() {
-	console.log(sorted);
 		if (!sorted) {
 			if (arraysMatch(arr, sArr)){
 				console.log("Sorted!");
